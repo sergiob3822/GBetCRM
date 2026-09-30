@@ -1027,10 +1027,10 @@ window.BRAVOS_CONTENT = {
   "working": [
     {
       "code": "AA-04",
-      "tone": "purple",
+      "tone": "green",
       "progress": 100,
       "status": {
-        "es": "Planeado",
+        "es": "Lanzado",
         "en": "Planned"
       },
       "title": {
