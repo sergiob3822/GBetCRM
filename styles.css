@@ -385,7 +385,7 @@ main { flex: 1; }
 .chg.is-open .chg-arrow { transform: rotate(-90deg); color: var(--green-dark); }
 
 .chg-desc { max-height: 0; overflow: hidden; transition: max-height .26s ease; }
-.chg.is-open .chg-desc { max-height: 3000px; }
+.chg.is-open .chg-desc { max-height: none; }
 .chg-desc-inner {
   padding: 2px 10px 12px 25px;
   font-size: 13.5px; line-height: 1.6; color: var(--muted);
