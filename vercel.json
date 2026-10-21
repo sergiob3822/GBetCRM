@@ -5,6 +5,8 @@
   "redirects": [
     { "source": "/versions", "destination": "/#/versions", "permanent": false },
     { "source": "/working", "destination": "/#/working", "permanent": false },
+    { "source": "/ventas", "destination": "/#/sales", "permanent": false },
+    { "source": "/sales", "destination": "/#/sales", "permanent": false },
     { "source": "/terms-of-service", "destination": "/#/terms-of-service", "permanent": false },
     { "source": "/terms", "destination": "/#/terms-of-service", "permanent": false }
   ],

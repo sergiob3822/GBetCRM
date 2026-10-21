@@ -793,6 +793,55 @@ video.fmt-media { width: 100%; background: #000; }
   .app-btn { flex: 1 1 auto; justify-content: center; }
 }
 
+.sales-shell { max-width: 900px; margin: 0 auto; padding: 56px 24px 72px; }
+
+.contact-grid {
+  margin-top: 36px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;
+}
+.contact-card {
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px 18px 18px 16px; border-radius: 18px;
+  background: #fff; border: 1px solid var(--line);
+  color: var(--ink); text-decoration: none;
+  box-shadow: 0 4px 20px -14px rgba(17, 27, 33, .4);
+  transition: transform .15s ease, box-shadow .2s ease, border-color .15s;
+}
+.contact-card:hover { transform: translateY(-2px); border-color: rgba(37, 211, 102, .45); box-shadow: 0 14px 30px -18px rgba(17, 27, 33, .55); }
+.contact-card.is-off { opacity: .55; cursor: default; box-shadow: none; }
+.contact-card.is-off:hover { transform: none; border-color: var(--line); }
+.contact-ic {
+  width: 46px; height: 46px; flex: none; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center; color: #fff;
+}
+.contact-ic svg { width: 24px; height: 24px; }
+.contact-card--whatsapp .contact-ic { background: var(--green); }
+.contact-card--facebook .contact-ic { background: #1877F2; }
+.contact-card--instagram .contact-ic { background: linear-gradient(135deg, #F58529, #DD2A7B 55%, #8134AF); }
+.contact-card--email .contact-ic { background: var(--teal-mid); }
+.contact-tx { display: flex; flex-direction: column; gap: 3px; min-width: 0; line-height: 1.2; }
+.contact-tx small { font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: .02em; }
+.contact-tx b {
+  font-size: 15.5px; font-weight: 800; letter-spacing: -.01em;
+  overflow-wrap: anywhere;
+}
+.contact-cta {
+  margin-left: auto; flex: none; font-size: 12.5px; font-weight: 700;
+  color: var(--green-dark); padding: 7px 14px; border-radius: 9px;
+  background: rgba(37, 211, 102, .12); border: 1px solid rgba(37, 211, 102, .28);
+}
+.sales-empty { margin-top: 36px; font-size: 14px; color: var(--muted); }
+
+@media (max-width: 720px) {
+  .sales-shell { padding-left: 18px; padding-right: 18px; }
+  .contact-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 420px) {
+  .contact-card { gap: 12px; padding: 16px 14px; }
+  .contact-tx b { font-size: 14px; }
+  .contact-cta { padding: 6px 10px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { transition: none !important; animation: none !important; }

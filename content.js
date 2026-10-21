@@ -18,6 +18,10 @@ window.BRAVOS_CONTENT = {
       "es": "Aplicaciones",
       "en": "Applications"
     },
+    "sales": {
+      "es": "Ventas",
+      "en": "Sales"
+    },
     "terms": {
       "es": "Términos y Condiciones",
       "en": "Terms and Conditions"
@@ -1544,6 +1548,70 @@ window.BRAVOS_CONTENT = {
           "url": "https://github.com/sergiob3822/crm-bravos/releases/download/v1.0/BravosCRM-android-1.0.apk"
         }
       ]
+    }
+  },
+  "salesPage": {
+    "kicker": {
+      "es": "Ventas",
+      "en": "Sales"
+    },
+    "title": {
+      "es": "Hablemos de tu negocio",
+      "en": "Let's talk about your business"
+    },
+    "sub": {
+      "es": "Escribinos por el canal que prefieras y te armamos una propuesta a medida.",
+      "en": "Reach us on the channel you prefer and we will prepare a tailored proposal."
+    },
+    "empty": {
+      "es": "Muy pronto vas a encontrar acá nuestros canales de contacto.",
+      "en": "Our contact channels will be available here soon."
+    },
+    "contacts": {
+      "whatsapp": {
+        "label": {
+          "es": "WhatsApp",
+          "en": "WhatsApp"
+        },
+        "cta": {
+          "es": "Escribinos",
+          "en": "Message us"
+        },
+        "value": ""
+      },
+      "facebook": {
+        "label": {
+          "es": "Facebook",
+          "en": "Facebook"
+        },
+        "cta": {
+          "es": "Visitar",
+          "en": "Visit"
+        },
+        "value": ""
+      },
+      "instagram": {
+        "label": {
+          "es": "Instagram",
+          "en": "Instagram"
+        },
+        "cta": {
+          "es": "Seguinos",
+          "en": "Follow us"
+        },
+        "value": ""
+      },
+      "email": {
+        "label": {
+          "es": "Correo",
+          "en": "Email"
+        },
+        "cta": {
+          "es": "Enviar correo",
+          "en": "Send email"
+        },
+        "value": ""
+      }
     }
   },
   "footer": {

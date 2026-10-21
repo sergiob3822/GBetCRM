@@ -136,6 +136,23 @@
     };
   }
 
+  var CONTACT_KINDS = ['whatsapp', 'facebook', 'instagram', 'email'];
+
+  function defaultSalesPage() {
+    return {
+      kicker: { es: 'Ventas', en: 'Sales' },
+      title: { es: 'Hablemos de tu negocio', en: "Let's talk about your business" },
+      sub: { es: 'Escribinos por el canal que prefieras y te armamos una propuesta a medida.', en: 'Reach us on the channel you prefer and we will prepare a tailored proposal.' },
+      empty: { es: 'Muy pronto vas a encontrar acá nuestros canales de contacto.', en: 'Our contact channels will be available here soon.' },
+      contacts: {
+        whatsapp: { label: { es: 'WhatsApp', en: 'WhatsApp' }, cta: { es: 'Escribinos', en: 'Message us' }, value: '' },
+        facebook: { label: { es: 'Facebook', en: 'Facebook' }, cta: { es: 'Visitar', en: 'Visit' }, value: '' },
+        instagram: { label: { es: 'Instagram', en: 'Instagram' }, cta: { es: 'Seguinos', en: 'Follow us' }, value: '' },
+        email: { label: { es: 'Correo', en: 'Email' }, cta: { es: 'Enviar correo', en: 'Send email' }, value: '' },
+      },
+    };
+  }
+
   function normalize(c) {
     if (c && c.home && Array.isArray(c.home.chips)) {
       c.home.chips = c.home.chips.map(function (ch) {
@@ -180,6 +197,19 @@
         if (!Array.isArray(ap[p].versions)) ap[p].versions = [];
       });
     }
+    if (c && c.nav && !c.nav.sales) {
+      c.nav.sales = { es: 'Ventas', en: 'Sales' };
+    }
+    if (c && !c.salesPage) c.salesPage = defaultSalesPage();
+    if (c && c.salesPage) {
+      var sp = c.salesPage, defs = defaultSalesPage();
+      ['kicker', 'title', 'sub', 'empty'].forEach(function (k) { if (!sp[k]) sp[k] = defs[k]; });
+      if (!sp.contacts) sp.contacts = {};
+      CONTACT_KINDS.forEach(function (k) {
+        if (!sp.contacts[k]) sp.contacts[k] = defs.contacts[k];
+        if (typeof sp.contacts[k].value !== 'string') sp.contacts[k].value = '';
+      });
+    }
     return c;
   }
 
@@ -208,6 +238,7 @@
             '<button class="nav-btn' + (pg === 'versions' ? ' is-active' : '') + '" data-go="#/versions"' + ed('nav.versions') + '</button>' +
             '<button class="nav-btn' + (pg === 'working' ? ' is-active' : '') + '" data-go="#/working"' + ed('nav.coming') + '</button>' +
             '<button class="nav-btn' + (pg === 'apps' ? ' is-active' : '') + '" data-go="#/apps"' + ed('nav.apps') + '</button>' +
+            '<button class="nav-btn' + (pg === 'sales' ? ' is-active' : '') + '" data-go="#/sales"' + ed('nav.sales') + '</button>' +
             '<button class="nav-btn' + (pg === 'terms' ? ' is-active' : '') + '" data-go="#/terms-of-service"' + ed('nav.terms') + '</button>' +
           '</nav>' +
           '<div class="lang-switch">' +
@@ -231,6 +262,7 @@
             '<button class="footer-link" data-go="#/versions"' + ed('nav.versions') + '</button>' +
             '<button class="footer-link" data-go="#/working"' + ed('nav.coming') + '</button>' +
             '<button class="footer-link" data-go="#/apps"' + ed('nav.apps') + '</button>' +
+            '<button class="footer-link" data-go="#/sales"' + ed('nav.sales') + '</button>' +
             '<button class="footer-link" data-go="#/terms-of-service"' + ed('nav.terms') + '</button>' +
           '</div>' +
           '<div class="footer-rights">' + esc(c.brand.copyright) + ' — ' +
@@ -563,12 +595,82 @@
       '</section>';
   }
 
+  var CONTACT_ICON = {
+    whatsapp: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.66 15l-1.3 4.76 4.88-1.28A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-2.9.76.77-2.83-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.12-.16.25-.64.8-.78.97-.14.16-.29.18-.53.06a6.7 6.7 0 0 1-3.32-2.9c-.25-.43.25-.4.72-1.33.08-.16.04-.3-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.47a.9.9 0 0 0-.66.31c-.23.25-.86.85-.86 2.07s.88 2.4 1 2.57c.13.16 1.74 2.65 4.2 3.72 1.56.67 2.17.73 2.95.62.48-.07 1.46-.6 1.67-1.18.2-.58.2-1.08.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>',
+    facebook: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg>',
+    instagram: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>',
+    email: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  };
+
+  var SOCIAL_BASE = { facebook: 'https://www.facebook.com/', instagram: 'https://www.instagram.com/' };
+
+  function contactHref(kind, value) {
+    var v = String(value || '').trim();
+    if (!v) return '';
+    if (kind === 'email') return /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/.test(v) ? 'mailto:' + v : '';
+    if (/^https:\/\/[^\s"<>]+$/i.test(v)) return v;
+    if (kind === 'whatsapp') {
+      var digits = v.replace(/\D/g, '');
+      return digits.length >= 8 ? 'https://wa.me/' + digits : '';
+    }
+    var handle = v.replace(/^@/, '');
+    return /^[A-Za-z0-9._-]+$/.test(handle) ? SOCIAL_BASE[kind] + handle : '';
+  }
+
+  function contactShown(kind, value) {
+    var v = String(value || '').trim();
+    if (kind === 'instagram' && /^[A-Za-z0-9._-]+$/.test(v)) return '@' + v;
+    return v.replace(/^https:\/\/(www\.)?/i, '').replace(/\/$/, '');
+  }
+
+  function isEditing() {
+    return !!(window.BX_ONLINE || window.__bxStarted);
+  }
+
+  function salesPage() {
+    var sp = state.content.salesPage;
+    var editing = isEditing();
+    var cards = CONTACT_KINDS.map(function (kind) {
+      var base = 'salesPage.contacts.' + kind;
+      var value = sp.contacts[kind].value;
+      var href = contactHref(kind, value);
+      if (!href && !editing) return '';
+      var attrs = href
+        ? ' href="' + esc(href) + '"' + (kind === 'email' ? '' : ' target="_blank" rel="noopener"')
+        : '';
+      var shown = String(value || '').trim()
+        ? esc(contactShown(kind, value))
+        : (state.lang === 'es' ? 'Sin cargar' : 'Not set');
+      return '<a class="contact-card contact-card--' + kind + (href ? '' : ' is-off') + '"' + attrs + '>' +
+          '<span class="contact-ic">' + CONTACT_ICON[kind] + '</span>' +
+          '<span class="contact-tx">' +
+            '<small' + ed(base + '.label') + '</small>' +
+            '<b>' + shown + '</b>' +
+          '</span>' +
+          '<span class="contact-cta"' + ed(base + '.cta') + '</span>' +
+        '</a>';
+    }).join('');
+    var body = cards
+      ? '<div class="contact-grid">' + cards + '</div>'
+      : '<p class="sales-empty"' + ed('salesPage.empty') + '</p>';
+    return '' +
+      '<section class="subpage">' +
+        '<div class="sales-shell">' +
+          '<span class="kicker"' + ed('salesPage.kicker') + '</span>' +
+          '<h1' + ed('salesPage.title') + '</h1>' +
+          '<p class="subpage-sub"' + ed('salesPage.sub') + '</p>' +
+          body +
+        '</div>' +
+      '</section>';
+  }
+
   var PAGES = {
     home: homePage,
     versions: versionsPage,
     working: workingPage,
     terms: termsPage,
     apps: appsPage,
+    sales: salesPage,
     login: loginPage,
   };
 
@@ -577,6 +679,7 @@
     working: 'nav.coming',
     terms: 'nav.terms',
     apps: 'nav.apps',
+    sales: 'nav.sales',
   };
 
   function pageTitle() {
@@ -724,6 +827,7 @@
     if (h === 'versions') return 'versions';
     if (h === 'working') return 'working';
     if (h === 'apps' || h === 'applications') return 'apps';
+    if (h === 'sales' || h === 'ventas') return 'sales';
     if (h === 'terms-of-service' || h === 'terms') return 'terms';
     if (h === 'login' || h === 'login/') return 'login';
     return 'home';
@@ -849,6 +953,7 @@
   function startOnlineEditor() {
     if (window.BX_ONLINE) return;
     window.BX_ONLINE = true;
+    if (state.page === 'sales') render();
     var s = document.createElement('script');
     s.src = 'editor.js';
     document.body.appendChild(s);

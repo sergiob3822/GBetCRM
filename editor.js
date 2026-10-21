@@ -452,7 +452,7 @@
       '<div class="bx-acc-body">' + body + '</div></details>';
   }
 
-  var openSections = { home: true };
+  var openSections = { home: true, sales: true };
 
   function sectionHome() {
     var c = B.state.content;
@@ -651,6 +651,32 @@
     return accordion('apps', 'Aplicaciones', null, body);
   }
 
+  var CONTACT_FIELDS = [
+    { kind: 'whatsapp', title: 'WhatsApp', valueLabel: 'Número con código de país (ej. +54 9 11 1234-5678)' },
+    { kind: 'facebook', title: 'Facebook', valueLabel: 'Usuario de la página o link https://…' },
+    { kind: 'instagram', title: 'Instagram', valueLabel: 'Usuario (ej. @bravoscrm) o link https://…' },
+    { kind: 'email', title: 'Correo', valueLabel: 'Dirección de correo (ej. ventas@bravos.com.ar)' },
+  ];
+
+  function sectionSales() {
+    var body =
+      fieldText('Kicker', 'salesPage.kicker') +
+      fieldText('Título', 'salesPage.title') +
+      fieldText('Descripción', 'salesPage.sub', true) +
+      fieldText('Texto si no hay contactos cargados', 'salesPage.empty', true) +
+      '<p class="bx-hint">Los contactos que dejes vacíos no se muestran a los visitantes.</p>' +
+      CONTACT_FIELDS.map(function (f) {
+        var base = 'salesPage.contacts.' + f.kind;
+        return '<div class="bx-item">' +
+          '<div class="bx-item-head"><span class="bx-item-title">' + B.esc(f.title) + '</span></div>' +
+          fieldRaw(f.valueLabel, base + '.value') +
+          fieldText('Nombre que se muestra', base + '.label') +
+          fieldText('Texto del botón', base + '.cta') +
+          '</div>';
+      }).join('');
+    return accordion('sales', 'Ventas · Contactos', null, body);
+  }
+
   function sectionTerms() {
     var c = B.state.content;
     var body =
@@ -680,6 +706,7 @@
       fieldText('Versiones', 'nav.versions') +
       fieldText('Próximamente', 'nav.coming') +
       fieldText('Aplicaciones', 'nav.apps') +
+      fieldText('Ventas', 'nav.sales') +
       fieldText('Términos', 'nav.terms');
     return accordion('brand', 'Marca, nav y footer', null, body);
   }
@@ -689,6 +716,7 @@
     { tab: 'versions', hash: '#/versions', label: 'Versiones' },
     { tab: 'working', hash: '#/working', label: 'Próximamente' },
     { tab: 'apps', hash: '#/apps', label: 'Aplicaciones' },
+    { tab: 'sales', hash: '#/sales', label: 'Ventas' },
     { tab: 'terms', hash: '#/terms-of-service', label: 'Términos' },
     { tab: 'general', hash: '', label: 'General' },
   ];
@@ -699,6 +727,7 @@
     if (tab === 'versions') return sectionVersions();
     if (tab === 'working') return sectionWorking();
     if (tab === 'apps') return sectionApps();
+    if (tab === 'sales') return sectionSales();
     if (tab === 'terms') return sectionTerms();
     if (tab === 'general') return sectionBrand();
     return sectionHome() + sectionChat() + sectionFeatures();
