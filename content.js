@@ -243,6 +243,71 @@ window.BRAVOS_CONTENT = {
   },
   "versions": [
     {
+      "v": "v0.016.5",
+      "date": {
+        "es": "Oct 2026",
+        "en": "Oct. 2026"
+      },
+      "tags": [
+        {
+          "label": {
+            "es": "Implementaciones",
+            "en": "Implementations"
+          },
+          "tone": "green",
+          "glow": true
+        },
+        {
+          "label": {
+            "es": "Arreglo de Errores",
+            "en": "Error Correction"
+          },
+          "tone": "red",
+          "glow": true
+        },
+        {
+          "label": {
+            "es": "Novedades",
+            "en": "What's New"
+          },
+          "tone": "purple",
+          "glow": true
+        }
+      ],
+      "changes": [
+        {
+          "t": {
+            "es": "PinaccleBot",
+            "en": "PinaccleBot"
+          },
+          "desc": {
+            "es": "- Se agregó la billetera PepePay",
+            "en": "- The PepePay wallet was added."
+          }
+        },
+        {
+          "t": {
+            "es": "Implementaciones",
+            "en": "Implementations"
+          },
+          "desc": {
+            "es": "- **Gestor contable por integración:** El apartado Contabilidad reúne la configuración de cada integración, sus costos y sus registros de ingresos y gastos. Permite consultar por separado la ganancia neta y el flujo de caja, con acceso reservado a los administradores de la cuenta.\n- **Declarar egresos desde el informe:** A la derecha de Inversión y gastos se incorpora el botón Declarar egreso. El formulario permite registrar el importe, la fecha y el motivo de un gasto externo al CRM. Su registro descuenta el importe de la ganancia neta y del flujo de caja, sin realizar una transferencia desde la billetera.\n- **Motivo del egreso en el CSV:** La descarga contable incluye el detalle de los egresos declarados y su motivo, además de los totales del período. El registro queda vinculado a la integración seleccionada y conserva su fecha para revisar el resultado correspondiente.\n- **Resultados y movimientos en una misma pantalla:** El gestor reúne indicadores, gráficos de ganancia y caja, inversión y gastos, y los últimos movimientos contables. Los filtros de período y agrupación permiten revisar la evolución sin mezclar los resultados de distintas integraciones.\n- **Movimientos más claros:** Los ingresos, las comisiones y los egresos se distinguen en bloques verdes, rojos y amarillos, con texto en negrita. Las salidas y comisiones muestran el importe con signo negativo.",
+            "en": "- **Accounting by integration:** The Accounting section brings together each integration's settings, costs, income and expense records. Administrators can review net profit and cash flow separately within their account.\n- **Declare outflows from the report:** A Declare outflow button is added to the right of Investment and expenses. The form records an external expense's amount, date and reason. Saving it reduces net profit and cash flow without initiating a wallet transfer.\n- **Expense reasons in the CSV:** The accounting download includes declared outflows and their reasons alongside period totals. Each record belongs to the selected integration and keeps its date for reviewing the corresponding result.\n- **Results and entries in one screen:** The accounting manager brings together indicators, profit and cash-flow charts, investment and expenses, and recent accounting entries. Period and grouping filters make it possible to review trends without mixing results from different integrations.\n- **Clearer movements:** Income, fees and outflows appear in green, red and yellow blocks with bold text. Outflows and fees display negative amounts."
+          }
+        },
+        {
+          "t": {
+            "es": "Arreglo de Errores",
+            "en": "Error Correction"
+          },
+          "desc": {
+            "es": "- **Conversaciones sin saltos al Dashboard:** Al eliminar una conversación se vuelve a la lista de conversaciones correspondiente, en lugar de abrir el Dashboard. Se conserva el contexto de la bandeja, etiqueta, equipo o vista desde la que se estaba trabajando.\n- **Acentos correctos en los movimientos:** Se corrigen los caracteres dañados en los conceptos de los ajustes contables, conservando sus importes y su trazabilidad.\n- **Controles visibles en la interfaz publicada:** Se corrige la diferencia entre las fuentes actualizadas y los recursos que recibía el navegador, para que los controles contables vigentes aparezcan en el panel.\n- **Ventas y Clientes disponibles en Informes:** Se corrige la configuración que mantenía ocultos estos apartados y bloqueaba sus consultas, conservando las funciones y datos existentes.",
+            "en": "- **Conversations no longer jump to Dashboard:** Deleting a conversation returns to the relevant conversation list instead of opening Dashboard. The inbox, label, team or view context is preserved.\n- **Correct accents in accounting entries:** Corrupted characters in accounting adjustment descriptions are corrected while preserving amounts and auditability.\n- **Current controls visible in the published interface:** A mismatch between updated sources and browser assets is corrected so that the current accounting controls appear in the panel.\n- **Sales and Clients available in Reports:** The configuration that hid these sections and blocked their queries is corrected while preserving existing features and data."
+          }
+        }
+      ]
+    },
+    {
       "v": "v0.016.4",
       "date": {
         "es": "Oct 2026",
